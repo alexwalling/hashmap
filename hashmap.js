@@ -1,3 +1,5 @@
+var hashmap;
+
 //hash function from darkskyapp
 //find original hash function at https://github.com/darkskyapp/string-hash
 function hash(str) {
@@ -17,26 +19,91 @@ function constructor(size){
 	var tempHashMap = new Array(size);
 	return tempHashMap;
 }
-//link key to value
+//link string key to arbitrary value
 function set(key, value){
-	return ifItWorked;
+	if(key == null){
+		return false;
+	}
+
+	var newEntry = {};
+	var index = hash(key) % hashmap.length;
+	newEntry[key] = value;
+
+	if(hashmap[index] == undefined || hashmap[index] == 'closed'){
+		hashmap[index] = newEntry;
+		return true;
+	}
+	while(hashmap[index] != undefined){
+		if(index == hashmap.length - 1){
+			index = 0;
+		} else {
+			index++;
+		}
+		if(hashmap[index] == undefined){
+			hashmap[index] = newEntry;
+			return true;
+		}
+	}
+	return false;
 }
 
-function get(){
+function get(key){
+	var index = hash(key) % hashmap.length;
 
 }
 
 function del(key){
-
+	var index = hash(key) % hashmap.length;
+	if(hashmap[index] == undefined){
+		return null;
+	}
+	while(hashmap[index] != undefined){
+		if(typeof hashmap[index] == 'object' && Object.keys(hashmap[index]) == key){
+			var r = hashmap[index][key];
+			hashmap[index] = 'closed';
+			return r;
+		}
+		if(index == hashmap.length - 1){
+			index = 0;
+		} else {
+			index++;
+		}
+	}
 }
 
 function load(){
 	return float;
 }
 
-var hashmap = constructor(10);
-console.log(hashmap.length);
+function print(){
+	console.log('printing array:');
+	for(i = 0; i < hashmap.length; i++){
+		console.log('i: ', i);
+		console.log('val: ', hashmap[i]);
+	}
+	console.log();
+}
 
-console.log(hashmap[1]);
-hashmap[1] = 10;
-console.log(hashmap[1]);
+hashmap = constructor(10);
+console.log('length: ',hashmap.length);
+
+console.log('test: ', hash('a') % hashmap.length);
+
+console.log();
+
+set('a',10); //hash of a == 4
+set('a',11);
+set('a',12);
+
+console.log(hashmap[4]);
+
+console.log();
+
+print();
+del('a');
+print();
+del('a');
+print();
+
+set('a',34);
+print();
