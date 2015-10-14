@@ -1,6 +1,17 @@
 function map(){
 	this.arr = [];
 
+	function LinkedList(val){
+		this.head = val;
+
+		this.add = function (val){
+
+		}
+		this.remove = function (val){
+
+		}
+	}
+
 	//hash function from darkskyapp
 	//find original hash function at https://github.com/darkskyapp/string-hash
 	this.hash = function (str) {
