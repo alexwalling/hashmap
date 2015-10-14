@@ -48,6 +48,19 @@ function map(){
 
 	this.get = function (key){
 		var index = this.hash(key) % this.arr.length;
+		if(this.arr[index] == undefined){
+			return null;
+		}
+		while(this.arr[index] != undefined){
+			if(typeof this.arr[index] == 'object' && Object.keys(this.arr[index]) == key){
+				return this.arr[index][key];
+			}
+			if(index == this.arr.length - 1){
+				index = 0;
+			} else {
+				index++;
+			}
+		}
 	};
 
 	this.del = function (key){
@@ -75,6 +88,7 @@ function map(){
 
 	this.print = function (){
 		console.log('printing array:');
+		console.log('----------------------------------------------------');
 		for(i = 0; i < this.arr.length; i++){
 			console.log('i: ', i);
 			console.log('val: ', this.arr[i]);
