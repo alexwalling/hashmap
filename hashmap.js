@@ -1,11 +1,6 @@
-function map(){
-	this.arr = [];
-
-	function node(val){
-		this.value = val;
-		this.next = null;
-		this.prev = null;
-	}
+module.exports = {
+map: function (size){
+	this.arr = new Array(size);
 
 	//hash function from darkskyapp
 	//find original hash function at https://github.com/darkskyapp/string-hash
@@ -21,9 +16,6 @@ function map(){
 		return h >>> 0;
 	};
 
-	this.constructor = function (size){
-		this.arr = new Array(size);
-	};
 	//link string key to arbitrary value
 	this.set = function (key, value){
 		if(key == null){
@@ -34,15 +26,9 @@ function map(){
 		var index = this.hash(key) % this.arr.length;
 		newEntry[key] = value;
 
-		tempNode = new node(newEntry);
 		if(this.arr[index] == undefined || this.arr[index] == 'closed'){
-			this.arr[index] = tempNode;
+			this.arr[index] = newEntry;
 			return true;
-		}
-		headNode = this.arr[index];
-		endNode = headNode;
-		while(endNode.next != null){
-			endNode = endNode.next;
 		}
 		while(this.arr[index] != undefined){
 			if(index == this.arr.length - 1){
@@ -51,9 +37,7 @@ function map(){
 				index++;
 			}
 			if(this.arr[index] == undefined || this.arr[index] == 'closed'){
-				endNode.next = tempNode;
-				tempNode.prev = endNode;
-				this.arr[index] = tempNode;
+				this.arr[index] = newEntry;
 				return true;
 			}
 		}
@@ -83,7 +67,7 @@ function map(){
 			return null;
 		}
 		while(this.arr[index] != undefined){
-			if(typeof this.arr[index] == 'object' && Object.keys(this.arr[index].value) == key){
+			if(typeof this.arr[index] == 'object' && Object.keys(this.arr[index]) == key){
 				var r = this.arr[index][key];
 				this.arr[index] = 'closed';
 				return r;
@@ -97,7 +81,13 @@ function map(){
 	};
 
 	this.load = function (){
-		return float;
+		var ret = 0;
+		for(i = 0; i < this.arr.length; i++){
+			if(this.arr[i] != undefined && this.arr[i] != 'closed'){
+				ret ++;
+			}
+		}
+		return ret / this.arr.length;
 	};
 
 	this.print = function (){
@@ -110,43 +100,35 @@ function map(){
 			if( this.arr[i] == undefined || this.arr[i] == 'closed'){
 				console.log('value: ', this.arr[i]);
 			} else {
-				console.log('value: ', this.arr[i].value);
+				console.log('value: ', this.arr[i]);
 			}
 		}
 		console.log();
 	};
 }
-hashmap = new map();
-hashmap.constructor(10);
-console.log('length: ',hashmap.length);
+};
+/*
+love = new map(10);
+love.set('gabrielle', 15);
+love.set('alex', 17);
+love.set('gabby leigh', 34);
+love.set('G', 41);
+love.set('Gabrielle', 31);
+love.set('Gabby Leigh', 19);
+love.set('Alex', 19);
+love.print();
+love.del('Gabby Leigh');
+love.print();
+console.log(love.get('Gabrielle'));
 
-console.log();
+console.log(love.hash('gabrielle') % 10);
+console.log(love.hash('alex') % 10);
+console.log(love.hash('gabby leigh') % 10);
+console.log(love.hash('G') % 10);
+console.log(love.hash('Gabrielle') % 10);
+console.log(love.hash('Gabby Leigh') % 10);
+console.log(love.hash('Alex') % 10);
 
-hashmap.set('a',10); //hash of a == 4
-hashmap.set('a',11);
-hashmap.set('a',12);
-
-console.log(hashmap[4]);
-
-console.log();
-
-hashmap.print();
-//hashmap.del('a');
-hashmap.print();
-//hashmap.del('a');
-hashmap.print();
-
-hashmap.set('hello',34);
-hashmap.set('a',19);
-hashmap.print();
-hashmap.del('hello');
-hashmap.print();
-//hashmap.set('a',41);
-hashmap.print();
-//console.log(hashmap.hash('g') % 10);
-
-hashmap.set('g',19);
-hashmap.print();
-hashmap.set('g',15);
-hashmap.set('g',34);
-hashmap.print();
+console.log(love.get('Alex'));
+console.log(love.load());
+*/
