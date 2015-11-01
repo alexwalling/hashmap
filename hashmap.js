@@ -13,7 +13,7 @@ map: function (size){
 		/* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
 		* integers. Since we want the results to be always positive, convert the
 		* signed int to an unsigned by doing an unsigned bitshift. */
-		return h >>> 0;
+		return (h >>> 0) % this.arr.length;
 	};
 
 	//link string key to arbitrary value
@@ -23,14 +23,15 @@ map: function (size){
 		}
 
 		var newEntry = {};
-		var index = this.hash(key) % this.arr.length;
+		var index = this.hash(key);
 		newEntry[key] = value;
 
 		if(this.arr[index] == undefined || this.arr[index] == 'closed'){
 			this.arr[index] = newEntry;
 			return true;
 		}
-		while(this.arr[index] != undefined){
+		var i = 0;
+		while(this.arr[index] != undefined && i <= this.arr.length){
 			if(index == this.arr.length - 1){
 				index = 0;
 			} else {
@@ -40,12 +41,13 @@ map: function (size){
 				this.arr[index] = newEntry;
 				return true;
 			}
+			i++;
 		}
 		return false;
 	};
 
 	this.get = function (key){
-		var index = this.hash(key) % this.arr.length;
+		var index = this.hash(key);
 		if(this.arr[index] == undefined){
 			return null;
 		}
@@ -59,10 +61,11 @@ map: function (size){
 				index++;
 			}
 		}
+		return null;
 	};
 
 	this.del = function (key){
-		var index = this.hash(key) % this.arr.length;
+		var index = this.hash(key);
 		if(this.arr[index] == undefined){
 			return null;
 		}
@@ -78,6 +81,7 @@ map: function (size){
 				index++;
 			}
 		}
+		return null;
 	};
 
 	this.load = function (){
@@ -91,7 +95,6 @@ map: function (size){
 	};
 
 	this.print = function (){
-		console.log('printing array:');
 		console.log('----------------------------------------------------');
 		for(i = 0; i < this.arr.length; i++){
 			//console.log('i: ', i);
