@@ -3,6 +3,14 @@ KPCB fellows challenge problem for application.  Implements a fixed fixed-size h
 
 Uses open addressing and linear probing to resolve collisions.
 
+##Requirements
+- Node
+- mocha
+```
+npm install node
+npm install -g mocha
+```
+
 ##Run testing
 >mocha
 
