@@ -8,4 +8,6 @@ Uses open addressing and linear probing to resolve collisions.
 
 ##Using hash map
 >in another file you must use
->var hashmap = require('/hashmap');
+```
+var hashmap = require('/hashmap');
+```
