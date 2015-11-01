@@ -7,8 +7,8 @@ Uses open addressing and linear probing to resolve collisions.
 - Node
 - mocha
 ```
-npm install node
-npm install -g mocha
+$ npm install node
+$ npm install -g mocha
 ```
 
 ##Run testing
