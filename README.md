@@ -15,11 +15,11 @@ npm install -g mocha
 >mocha
 
 ##Using hash map
->in another file you must use
+-Using hashmap in another file you must use
 ```
 var hashmap = require('/hashmap');
 ```
->Use hashmap
+-Use hashmap
 ```
 myHashmap = new map(size);
 myHashmap.set('key', value); //return boolean indicating success/failure
