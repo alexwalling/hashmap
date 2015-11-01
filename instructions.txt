@@ -1,0 +1,8 @@
+1) install
+	$ npm install node
+	$ npm install -g mocha
+
+2) run the test
+	$ mocha
+
+link to github: https://github.com/alexwalling/hashmap
