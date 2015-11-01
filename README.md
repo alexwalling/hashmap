@@ -1,7 +1,11 @@
 ##Hashmap implementation
 KPCB fellows challenge problem for application.  Implements a fixed fixed-size hash map that associates string keys with arbitrary data object references
 
-uses seperate chaining with linked list
+Uses open addressing and linear probing to resolve collisions.
 
-##Run
->node hashmap.js
+##Run testing
+>mocha
+
+##Using hash map
+>in another file you must use
+>var hashmap = require('/hashmap');
