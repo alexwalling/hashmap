@@ -12,7 +12,9 @@ npm install -g mocha
 ```
 
 ##Run testing
->mocha
+```
+$ mocha
+```
 
 ##Using hash map
 Using hashmap in another file you must use
