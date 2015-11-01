@@ -14,8 +14,8 @@ var hashmap = require('/hashmap');
 >Use hashmap
 ```
 myHashmap = new map(size);
-myHashmap.set('key', value);
-myHashmap.get('key');
-myHashmap.del('key');
-myHashmap.load();
+myHashmap.set('key', value); //return boolean indicating success/failure
+myHashmap.get('key'); //return value associated with key, or null if no value is set
+myHashmap.del('key'); // return value deleted on success or no if key has no value
+myHashmap.load(); //return load value
 myHashmap.print();
