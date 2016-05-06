@@ -1,0 +1,29 @@
+{
+  "name": "hashmap",
+  "version": "1.0.0",
+  "description": "hashtable implementation for KPCB application",
+  "main": "hashmap.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexwalling/hashmap.git"
+  },
+  "keywords": [
+    "hashmap"
+  ],
+  "author": "Alex Walling",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexwalling/hashmap/issues"
+  },
+  "homepage": "https://github.com/alexwalling/hashmap#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
